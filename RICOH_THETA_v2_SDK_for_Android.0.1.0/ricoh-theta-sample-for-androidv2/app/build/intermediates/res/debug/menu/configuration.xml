@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/configuration"
+        android:title="@string/menu_configuration"
+        android:showAsAction="always"
+        >
+    </item>
+
+</menu><!-- From: file:/Users/pperotti/Downloads/RICOH_THETA_v2_SDK_for_Android.0.1.0/ricoh-theta-sample-for-androidv2/app/src/main/res/menu/configuration.xml -->

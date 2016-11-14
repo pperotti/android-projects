@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/etTitleCC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/interimage_padding"
+        android:background="@color/app_background"
+        android:drawableLeft="@drawable/ic_cc_small"
+        android:drawablePadding="@dimen/interimage_padding"
+        android:enabled="false"
+        android:inputType="text"
+        android:text="@string/button_cc"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/button_font_size" >
+    </EditText>
+
+    <LinearLayout
+        android:id="@+id/llMoney"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginTop="@dimen/interimage_padding"
+        android:layout_marginBottom="@dimen/interimage_padding"
+        android:layout_below="@id/etTitleCC"
+        android:background="@color/button_selected_blue"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/txtSign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/money_sign"
+            android:textColor="@color/money_font_orange"
+            android:textSize="@dimen/money_font_sign" />
+
+        <EditText
+            android:id="@+id/etAmount"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/interimage_padding"
+            android:background="@color/button_selected_blue"
+            android:hint="@null"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:singleLine="true"
+            android:textColor="@color/money_font_orange"
+            android:textSize="@dimen/money_font_sign" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@id/llMoney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnCancelCC"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_medium_height"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_rounded_no_padding"
+            android:text="@string/button_cancel"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/button_font_size" />
+
+        <View
+            android:layout_weight="0"
+            android:layout_width="5dp"
+            android:layout_height="1dp" />
+
+        <Button
+            android:id="@+id/btnConfirmCC"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="@dimen/button_medium_height"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_rounded_no_padding"
+            android:enabled="false"
+            android:text="@string/button_confirm"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/button_font_size" />
+    </LinearLayout>
+
+</RelativeLayout>

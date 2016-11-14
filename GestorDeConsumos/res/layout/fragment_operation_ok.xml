@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/margin_layout_bottom"
+    android:background="@color/app_background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/llDetailContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@color/button_selected_blue"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvDetailConsumption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:drawableLeft="@drawable/ic_al_small"
+            android:drawablePadding="@dimen/interimage_padding"
+            android:gravity="center"
+            android:text="@string/button_desayuno"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/button_font_size" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvDetailName"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/detail_name"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llDetailContainer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/fragment_interitem_space"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/ic_ok"
+        android:gravity="center"
+        android:text="@string/title_operation_ok"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/money_font_size" >
+
+    </TextView>
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="@dimen/button_small_width"
+        android:layout_height="@dimen/button_medium_height"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn_rounded_no_padding"
+        android:text="@string/button_volver"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/button_font_size" />
+
+</RelativeLayout>

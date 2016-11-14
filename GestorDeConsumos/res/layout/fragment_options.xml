@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/txtOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragment_interitem_space"
+        android:gravity="center"
+        android:text="@string/title_options"
+        android:textColor="@android:color/white"
+        android:typeface="normal"
+        android:textSize="@dimen/fragment_header_font_size_big" >
+    </TextView>
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ivLogo"
+        android:layout_below="@id/txtOptions"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btnCC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_rounded"
+            android:drawableLeft="@drawable/ic_cc_small"
+            android:drawablePadding="10dp"
+            android:text="@string/button_cc"
+            android:textColor="@android:color/white"
+            android:paddingRight="30dp"
+            android:textSize="@dimen/button_font_size" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_weight="0" >
+        </View>
+
+        <Button
+            android:id="@+id/btnAlmuerzo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_rounded"
+            android:drawableLeft="@drawable/ic_al_small"
+            android:drawablePadding="10dp"
+            android:paddingRight="30dp"
+            android:text="@string/button_almuerzo"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/button_font_size" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_weight="0" >
+        </View>
+
+        <Button
+            android:id="@+id/btnDesayuno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_rounded"
+            android:drawableLeft="@drawable/ic_ds_small"
+            android:drawablePadding="10dp"
+            android:paddingRight="30dp"
+            android:text="@string/button_desayuno"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/button_font_size" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/image_configuration"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:minHeight="@dimen/common_height"
+    android:orientation="vertical" >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_btn_image_size"
+        android:id="@+id/textView" />
+
+    <RadioGroup
+        android:id="@+id/image_size"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/image_size_2048x1024"
+            android:id="@+id/image_size_2048x1024"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/image_size_5376x2688"
+            android:id="@+id/image_size_5376x2688"
+            android:checked="false" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_positive_button"
+            android:id="@+id/btn_commit" />
+    </RadioGroup>
+</LinearLayout>

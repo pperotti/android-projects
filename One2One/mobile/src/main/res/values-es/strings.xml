@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Uno-a-Uno</string>
+
+    <string name="home_activity_title">Comunicador Uno-a-Uno</string>
+    <string name="home_activity_description">Historial - Trabajos Previos</string>
+
+    <string name="new_task_activity_title">Nuevo Trabajo</string>
+    <string name="new_task_subject_title">Título</string>
+    <string name="new_task_summary_title">Cuerpo del Correo.</string>
+    <string name="new_task_summary_hint">Ingrese el contenido del correo a enviar.</string>
+    <string name="new_task_contacts_number">Seleccione un grupo de contactos</string>
+    <string name="new_task_contacts">Grupo seleccionado</string>
+    <string name="new_task_send">Enviar</string>
+    <string name="new_task_clear">Limpiar</string>
+
+    <string name="contacts_pick">Elija un grupo</string>
+    <string name="contacts_cancel">Cerrar</string>
+
+    <string name="notification_title">El trabajo comenzó a las %1$s</string>
+    <string name="notification_completion">¡Se envió el mail a todos los contactos elegidos!</string>
+
+    <string name="error_permission_contact">Asegúrese de que autoriza a la aplicación a leer sus contactos.</string>
+
+    <string name="error_no_subject">Complete el título del mail a enviar.</string>
+    <string name="error_no_body">Complete el texto que desea enviar.</string>
+    <string name="error_no_group">Elija un grupo.</string>
+    <string name="new_task_subject_hint">Ingrese el título del correo a enviar.</string>
+
+    <string name="new_task_subject">Evangelio Diario</string>
+    <string name="new_task_body">Si quieres leer o escuchar el Evangelio del día, haz clic en el siguiente enlace:</string>
+</resources>

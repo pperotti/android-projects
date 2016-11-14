@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GestorDeConsumos</string>
+    <string name="general_title">Gestion de Consumos</string>
+	<string name="title_header">Clinica Universitaria Reina Fabiola\nSistema de Gestión de Consumos</string>
+	<string name="title_options">Seleccione el\nTipo de Consumo</string>
+	<string name="title_reader">Acerque la tarjeta al teléfono\npara registrar el consumo</string>
+	<string name="button_desayuno">Desayuno</string>
+	<string name="button_almuerzo">Almuerzo</string>
+	<string name="button_cc">Cuenta Corriente</string>
+	<string name="button_cancel">Cancelar</string>
+	<string name="button_volver">Volver</string>
+	<string name="content_none"></string>
+	<string name="title_cc">Ingrese el importe deseado</string>
+	<string name="money_hint">000.00</string>
+	<string name="money_sign">$</string>
+	<string name="button_confirm">Confirmar</string>
+	<string name="title_operation_ok">Consumo realizado con éxito</string>
+	<string name="detail_name">GENTILI, Eduardo</string>
+	<string name="error_no_valid_money_amount">Ingrese un valor mayor a cero</string>
+	<string name="please_wait">\nEspere unos segundos\npor favor&#8230;\n</string>
+	<string name="error_cannot_connect">No se pudo conectar al servidor. Verifique conectividad e intente nuevamente.</string>
+	<string name="error_json_broken">El servicio no esta funcionando apropiadamente. Intente nuevamente.</string>
+	<string name="error_ping_missbehaving">El servicio no esta funcionando apropiadamente. Intente nuevamente.</string>
+	<string name="operation_cc">Cuenta Corriente</string>
+	<string name="operation_ds">Desayuno</string>
+	<string name="operation_al">Almuerzo</string>
+	
+	
+</resources>

@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="app_name">Backup in the Cloud</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="btn_list_files">List Files</string>
+    <string name="btn_manual_sync">Manual Sync</string>
+    <string name="btn_authenticate">Authenticate</string>
+    <string name="btn_sync">Sync</string>
+    <string name="txt_selected_account">Selected Account: %s</string>
+
+</resources>

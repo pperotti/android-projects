@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">OneByOne</string>
+
+    <string name="home_activity_title">One-by-One Communicator</string>
+    <string name="home_activity_description">History - Previous Works</string>
+
+    <string name="new_task_activity_title">New Task</string>
+    <string name="new_task_subject_title">Subject</string>
+    <string name="new_task_subject_hint">Create your subject</string>
+    <string name="new_task_summary_title">Email Body</string>
+    <string name="new_task_summary_hint">Enter your content.</string>
+    <string name="new_task_contacts_number">Please select a contact\'s group</string>
+    <string name="new_task_contacts">Selected Group</string>
+    <string name="new_task_send">Send</string>
+    <string name="new_task_clear">Clear</string>
+
+    <string name="contacts_pick">Pick your group</string>
+    <string name="contacts_cancel">Close</string>
+
+    <string name="notification_title">Work started at %1$s</string>
+    <string name="notification_completion">All contacts notified!</string>
+
+    <string name="error_permission_contact">Make sure you grant access to read from your contacts.</string>
+
+    <string name="error_no_subject">Please complete the subject.</string>
+    <string name="error_no_body">Please complete the text you intend to send.</string>
+    <string name="error_no_group">Please choose one group.</string>
+
+    <string name="new_task_subject">Daily Gospel</string>
+    <string name="new_task_body">If you want to read or listen for the daily gospel, please click on the following link: </string>
+</resources>
