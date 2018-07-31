@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_routes"
+            android:icon="@android:drawable/ic_menu_mapmode"
+            android:title="@string/drawer_action_routes" />
+        <item
+            android:id="@+id/nav_new_route"
+            android:icon="@android:drawable/ic_menu_add"
+            android:title="@string/drawer_action_new_route" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="Tools" />
+    </group>
+
+    <item android:title="@string/drawer_title_others">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@android:drawable/ic_menu_share"
+                android:title="@string/drawer_action_share" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@android:drawable/ic_menu_info_details"
+                android:title="@string/drawer_action_about" />
+        </menu>
+    </item>
+
+</menu>
