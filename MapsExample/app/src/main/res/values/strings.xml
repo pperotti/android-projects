@@ -20,4 +20,10 @@
     <string name="drawer_action_share">Share with others</string>
     <string name="drawer_title_others">More Options</string>
 
+    <!-- New Route -->
+    <string name="newroute_intro_text">The following URL will be used to download the points in xml format.</string>
+    <string name="newroute_url">https://github.com/pperotti/android-projects/blob/master/MapsExample/gpxtraces/2764198.gpx</string>
+    <string name="newroute_url_hint">http://your_gpx_file_url</string>
+    <string name="newroute_download">Download</string>
+
 </resources>
