@@ -74,6 +74,8 @@
             android:exported="false"
             android:grantUriPermissions="true"></provider>
 
+        <service android:name="com.pperotti.android.mapsexample.services.downloads.DownloadProcessorIntentService" android:exported="false"/>
+
     </application>
 
 </manifest>

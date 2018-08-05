@@ -25,6 +25,12 @@ public class MapsExampleDatabase extends SQLiteOpenHelper {
     public static final String MT_COLUMN_UNIT = "metricUnit";
     public static final String MT_COLUMN_VALUE = "metricValue";
 
+    //Points Table
+    public static final String PT_TABLE_NAME_PREFIX = "points";
+    public static final String PT_COLUMN_ROUTE_ID = RT_COLUMN_ROUTE_ID;
+    public static final String PT_COLUMN_LATITUDE = "latitude";
+    public static final String PT_COLUMN_LONGITUDE = "longitude";
+
     //Database Name
     private static final String DATABASE_NAME = "mapsexample.sqlite";
 
@@ -53,11 +59,22 @@ public class MapsExampleDatabase extends SQLiteOpenHelper {
             + MT_COLUMN_VALUE + " TEXT"
             + ")";
 
+    //Statement CREATE 'points-*'
+    public static final String STATEMENT_CREATE_POINTS_TABLE = "CREATE TABLE "
+            + PT_TABLE_NAME_PREFIX
+            + "%s ("
+            + PT_COLUMN_LATITUDE + " TEXT,"
+            + PT_COLUMN_LONGITUDE + " TEXT"
+            + ")";
+
     //Statement DROP 'routes'
     private static final String STATEMENT_DROP_ROUTES = "DROP TABLE IF EXISTS routes";
 
     //Statement DROP 'metrics'
     private static final String STATEMENT_DROP_METRICS = "DROP TABLE IF EXISTS metrics";
+
+    //Statement DROP 'points-'
+    public static final String STATEMENT_DROP_POINTS = "DROP TABLE IF EXISTS points%s";
 
     MapsExampleDatabase mapsExampleDatabase;
 
@@ -78,12 +95,12 @@ public class MapsExampleDatabase extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(STATEMENT_CREATE_ROUTES);
         sqLiteDatabase.execSQL(STATEMENT_CREATE_METRICS);
 
-        //Add indexes
+        //TODO: Add indexes
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         //Do nothing for the moment since we are in version 1.
-        Log.d(TAG, "onCreate");
+        Log.d(TAG, "onUpgrade");
     }
 }

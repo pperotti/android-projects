@@ -51,7 +51,7 @@ public class DownloadCompletionBroadcastReceiver extends BroadcastReceiver {
     }
 
     private void startPostProcessingIntentService(Context context, Route route) {
-        Intent intent = DownloadProcessorIntentService.createIntent(route.getRouteId());
-        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+        Intent intent = DownloadProcessorIntentService.createIntent(context, route.getRouteId());
+        context.startService(intent);
     }
 }

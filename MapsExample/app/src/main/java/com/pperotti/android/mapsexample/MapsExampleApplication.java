@@ -7,6 +7,8 @@ import android.util.Log;
 
 import com.pperotti.android.mapsexample.services.downloads.DownloadCompletionBroadcastReceiver;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 public class MapsExampleApplication extends Application {
 
     private static final String TAG = MapsExampleApplication.class.getSimpleName();
@@ -18,6 +20,8 @@ public class MapsExampleApplication extends Application {
         super.onCreate();
 
         Log.d(TAG, "onCreate()");
+
+        JodaTimeAndroid.init(this);
 
         registerReceiver(downloadCompletionBroadcastReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
     }

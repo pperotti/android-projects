@@ -190,8 +190,13 @@ public class RouteManager {
         if (route != null && contentResolver != null) {
             try {
                 ContentValues values = new ContentValues();
+                values.put(MapsExampleDatabase.RT_COLUMN_ROUTE_ID, route.getRouteId());
+                values.put(MapsExampleDatabase.RT_COLUMN_DOWNLOAD_ID, route.getDownloadId());
+                values.put(MapsExampleDatabase.RT_COLUMN_DOWNLOAD_URL, route.getDownloadUrl());
                 values.put(MapsExampleDatabase.RT_COLUMN_LOCAL_PATH, route.getLocalFilePath());
                 values.put(MapsExampleDatabase.RT_COLUMN_STATE, route.getState().name());
+                values.put(MapsExampleDatabase.RT_COLUMN_NAME, route.getName());
+                values.put(MapsExampleDatabase.RT_COLUMN_TIMESTAMP, route.getDownloadTimestamp());
 
                 String where = MapsExampleDatabase.RT_COLUMN_ROUTE_ID + "= ?";
                 String[] whereArgs = {String.valueOf(route.getRouteId())};

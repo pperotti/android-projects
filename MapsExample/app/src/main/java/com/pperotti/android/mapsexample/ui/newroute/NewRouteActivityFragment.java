@@ -2,6 +2,7 @@ package com.pperotti.android.mapsexample.ui.newroute;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,6 +19,8 @@ import android.widget.EditText;
 import com.pperotti.android.mapsexample.R;
 import com.pperotti.android.mapsexample.domain.routes.Route;
 import com.pperotti.android.mapsexample.domain.routes.RouteState;
+import com.pperotti.android.mapsexample.services.points.PointsManager;
+import com.pperotti.android.mapsexample.services.points.PointsProvider;
 import com.pperotti.android.mapsexample.services.routes.RouteManager;
 
 import java.io.File;
@@ -64,7 +67,6 @@ public class NewRouteActivityFragment extends Fragment {
                 Calendar c = Calendar.getInstance();
                 c.setTimeInMillis(System.currentTimeMillis());
 
-
                 //Create the object to persist the fact that we enqueued the new Route
                 Route newRoute = new Route()
                         .createRouteId()
@@ -83,6 +85,7 @@ public class NewRouteActivityFragment extends Fragment {
                 getActivity().finish();
             }
         });
+
     }
 
     private long enqueueFileDownload(Uri url, String fileName) {

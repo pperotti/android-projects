@@ -82,7 +82,7 @@ public class RouteProvider extends ContentProvider {
     public String getType(@NonNull Uri uri) {
         switch (sUriMatcher.match(uri)) {
             case ITEMS:
-                return DataContract.CONTENT_TYPE;
+                return DataContract.CONTENT_TYPE_ITEMS;
             case ITEM:
                 return DataContract.CONTENT_TYPE_ITEM;
             default:
@@ -154,14 +154,15 @@ public class RouteProvider extends ContentProvider {
         public static final String AUTHORITY = "com.pperotti.android.mapsexample.services.routes.data";
         public static final String PATH_ITEMS = "/items";
         public static final String PATH_ITEM = "/items/";
-        public static final Uri CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_ITEMS);
+        public static final Uri CONTENT_URI =
+                Uri.parse(SCHEME + AUTHORITY + PATH_ITEMS);
         public static final Uri SINGLE_ITEM_CONTENT_URI =
                 Uri.parse(SCHEME + AUTHORITY + PATH_ITEM);
 
         public static final int PATH_ITEM_ID_POSITION = 1;
 
         //Content Type
-        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.google.item";
+        public static final String CONTENT_TYPE_ITEMS = "vnd.android.cursor.dir/vnd.google.item";
         public static final String CONTENT_TYPE_ITEM = "vnd.android.cursor.item/vnd.google.item";
 
         // This class cannot be instantiated
