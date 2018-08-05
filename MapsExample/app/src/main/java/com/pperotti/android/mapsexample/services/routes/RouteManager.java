@@ -20,6 +20,12 @@ public class RouteManager {
 
     private static final String TAG = RouteManager.class.getSimpleName();
 
+    //Value to use as key in extras to pass route id.
+    public static final String EXTRA_ROUTE_ID = "extras_route_id";
+
+    //Constant to define there is no valid route id identified.
+    public static final long DEFAULT_NO_ROUTE_ID = -1;
+
     private ContentResolver contentResolver;
 
     public RouteManager(Context context) {

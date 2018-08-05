@@ -1,26 +1,15 @@
 package com.pperotti.android.mapsexample.services.downloads;
 
 /**
- * Contains only information about the downloaded file.
+ * Contains only information about the existing download.
  */
 public class DownloadInfo {
-
-    //Reference used to perform this download
-    private long downloadReference;
 
     //The status of the download
     private int downloadStatus;
 
     //THe local file path
     private String localFilePath;
-
-    public long getDownloadReference() {
-        return downloadReference;
-    }
-
-    public void setDownloadReference(long downloadReference) {
-        this.downloadReference = downloadReference;
-    }
 
     public int getDownloadStatus() {
         return downloadStatus;

@@ -19,9 +19,9 @@ public enum RouteState {
 
     PARSING_FAILED,
 
-    STORING,
+    PROCESSING,
 
-    STORED,
+    PROCESSED,
 
-    STORING_FAILED
+    PROCESSING_FAILED
 }

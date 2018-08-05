@@ -25,17 +25,28 @@
     <string name="newroute_url">https://github.com/pperotti/android-projects/raw/master/MapsExample/gpxtraces/2764198.gpx</string>
     <string name="newroute_url_hint">http://your_gpx_file_url</string>
     <string name="newroute_download">Download</string>
-    <string name="newroute_download_in_progress_title">Downloading GPX file</string>
-    <string name="newroute_download_in_progress_text">Downloading %s</string>
 
     <!-- Notifications -->
     <string name="notification_download_channel_name">Maps App Channel</string>
     <string name="notification_download_channel_description">Maps Description</string>
-    <string name="notification_download_title">Downloads</string>
-    <string name="notification_download_text">All downloads are completed</string>
-
+    <string name="notification_download_enqueued_title">Downloading %s</string>
+    <string name="notification_download_enqueued_text">Step 1/3</string>
+    <string name="notification_download_failed_title">Downloading %s</string>
+    <string name="notification_download_failed_text">Download Failed</string>
+    <string name="notification_parsing_title">Parsing %s</string>
+    <string name="notification_parsing_text">Step 2/3</string>
+    <string name="notification_parsed_title">Parsing %s</string>
+    <string name="notification_parsed_text">Step 2/3</string>
+    <string name="notification_parsing_failed_title">Parsing %s</string>
+    <string name="notification_parsing_failed_text">Step 2/3</string>
+    <string name="notification_processing_title">Processing %s</string>
+    <string name="notification_processing_text">Step 3/3</string>
+    <string name="notification_processing_failed_title">Processing %s</string>
+    <string name="notification_processing_failed_text">Step 3/3</string>
+    <string name="notification_processed_title">Steps Completed!</string>
+    <string name="notification_processed_text">All steps are now completed!</string>
 
     <!-- Errors -->
     <string name="error_download_in_progress">There is already a download in progress.</string>
-
+    <string name="error_permission_write_external_storage_required">You MUST authorize the app to use the external storage so the app works properly.</string>
 </resources>
