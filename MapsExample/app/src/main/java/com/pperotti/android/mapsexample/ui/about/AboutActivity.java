@@ -1,4 +1,4 @@
-package com.pperotti.android.mapsexample.about;
+package com.pperotti.android.mapsexample.ui.about;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

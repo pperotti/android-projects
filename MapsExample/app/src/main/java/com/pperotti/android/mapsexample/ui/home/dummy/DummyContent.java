@@ -1,4 +1,4 @@
-package com.pperotti.android.mapsexample.home.dummy;
+package com.pperotti.android.mapsexample.ui.home.dummy;
 
 import java.util.ArrayList;
 import java.util.HashMap;

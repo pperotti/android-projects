@@ -1,4 +1,4 @@
-package com.pperotti.android.mapsexample.home;
+package com.pperotti.android.mapsexample.ui.home;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pperotti.android.mapsexample.R;
-import com.pperotti.android.mapsexample.home.RouteFragment.OnListFragmentInteractionListener;
-import com.pperotti.android.mapsexample.home.dummy.DummyContent.DummyItem;
+import com.pperotti.android.mapsexample.ui.home.RouteFragment.OnListFragmentInteractionListener;
+import com.pperotti.android.mapsexample.ui.home.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 

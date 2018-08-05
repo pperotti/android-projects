@@ -1,4 +1,4 @@
-package com.pperotti.android.mapsexample.home;
+package com.pperotti.android.mapsexample.ui.home;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pperotti.android.mapsexample.R;
-import com.pperotti.android.mapsexample.home.dummy.DummyContent;
-import com.pperotti.android.mapsexample.home.dummy.DummyContent.DummyItem;
+import com.pperotti.android.mapsexample.ui.home.dummy.DummyContent;
+import com.pperotti.android.mapsexample.ui.home.dummy.DummyContent.DummyItem;
 
 /**
  * A fragment representing a list of Items.

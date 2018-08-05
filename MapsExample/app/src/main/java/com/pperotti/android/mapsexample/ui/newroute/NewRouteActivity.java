@@ -1,4 +1,4 @@
-package com.pperotti.android.mapsexample.newroute;
+package com.pperotti.android.mapsexample.ui.newroute;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

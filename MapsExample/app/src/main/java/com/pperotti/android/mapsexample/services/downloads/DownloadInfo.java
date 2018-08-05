@@ -1,4 +1,4 @@
-package com.pperotti.android.mapsexample.downloads;
+package com.pperotti.android.mapsexample.services.downloads;
 
 /**
  * Contains only information about the downloaded file.
@@ -22,7 +22,7 @@ public class DownloadInfo {
         this.downloadReference = downloadReference;
     }
 
-    public long getDownloadStatus() {
+    public int getDownloadStatus() {
         return downloadStatus;
     }
 

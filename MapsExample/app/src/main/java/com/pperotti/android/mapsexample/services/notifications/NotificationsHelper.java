@@ -1,4 +1,4 @@
-package com.pperotti.android.mapsexample.utils;
+package com.pperotti.android.mapsexample.services.notifications;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

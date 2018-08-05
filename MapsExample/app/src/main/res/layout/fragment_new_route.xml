@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
-    tools:context=".newroute.NewRouteActivityFragment"
+    tools:context=".ui.newroute.NewRouteActivityFragment"
     tools:showIn="@layout/activity_new_route">
 
     <TextView

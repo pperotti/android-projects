@@ -1,10 +1,8 @@
-package com.pperotti.android.mapsexample.utils;
+package com.pperotti.android.mapsexample.services.downloads;
 
 import android.app.DownloadManager;
 import android.content.Context;
 import android.database.Cursor;
-
-import com.pperotti.android.mapsexample.downloads.DownloadInfo;
 
 /**
  * Download helper activity to retrieve status and file of the downloaded file.
@@ -13,7 +11,7 @@ public class DownloadHelper {
 
     public static final DownloadInfo getFileInfoFromReference(Context context, long reference) {
 
-        DownloadManager downloadManager = (DownloadManager) context.getSystemService(DownloadManager.class);
+        DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         DownloadManager.Query query = new DownloadManager.Query();
         query.setFilterById(reference);
         Cursor cursor = downloadManager.query(query);
@@ -34,8 +32,5 @@ public class DownloadHelper {
 
         return downloadInfo;
     }
-
-
-
 
 }

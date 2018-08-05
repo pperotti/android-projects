@@ -1,39 +1,38 @@
-package com.pperotti.android.mapsexample.newroute;
+package com.pperotti.android.mapsexample.ui.newroute;
 
 import android.app.DownloadManager;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.pperotti.android.mapsexample.R;
-import com.pperotti.android.mapsexample.utils.StorageHelper;
+import com.pperotti.android.mapsexample.domain.routes.Route;
+import com.pperotti.android.mapsexample.domain.routes.RouteState;
+import com.pperotti.android.mapsexample.services.routes.RouteManager;
 
 import java.io.File;
-import java.net.URL;
+import java.util.Calendar;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class NewRouteActivityFragment extends Fragment {
 
-    private static final String TAG = NewRouteActivity.class.getSimpleName();
-
+    private static final String TAG = NewRouteActivityFragment.class.getSimpleName();
+    private static final long RESULT_PROBLEM_DURING_ENQUEUE = -1;
     private Button newrouteDownload;
     private EditText newrouteUrl;
+    private RouteManager routeManager;
 
     public NewRouteActivityFragment() {
     }
@@ -41,13 +40,13 @@ public class NewRouteActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        routeManager = new RouteManager(getContext());
         return inflater.inflate(R.layout.fragment_new_route, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         newrouteUrl = view.findViewById(R.id.newroute_url);
         newrouteDownload = view.findViewById(R.id.newroute_download_button);
         newrouteDownload.setOnClickListener(new View.OnClickListener() {
@@ -55,40 +54,40 @@ public class NewRouteActivityFragment extends Fragment {
             public void onClick(View view) {
                 String url = newrouteUrl.getText().toString();
 
-                long downloadInProgress = StorageHelper.getLong(
-                        getContext(),
-                        StorageHelper.DOWNLOAD_IN_PROGRESS_ID);
-                if (downloadInProgress != StorageHelper.DEFAULT_LONG_VALUE) {
-                    Toast.makeText(getContext(), R.string.error_download_in_progress, Toast.LENGTH_LONG).show();
-                //    return;
-                }
+                Uri uri = Uri.parse(url);
+                String fileName = uri.getLastPathSegment();
 
-                if (isValidUrl(url)) {
-                    //Download File
-                    long refId = enqueueFileDownload(url);
-                    Log.d(TAG, String.format("downloadRefId=%d", refId));
-                    StorageHelper.putLong(getContext(), StorageHelper.DOWNLOAD_IN_PROGRESS_ID, refId);
+                //Download File
+                long refId = enqueueFileDownload(uri, fileName);
 
-                    //TODO: Stop (We should do this via actions)
-                    getActivity().finish();
-                }
+                //Setup Calendar to format timestamp
+                Calendar c = Calendar.getInstance();
+                c.setTimeInMillis(System.currentTimeMillis());
+
+
+                //Create the object to persist the fact that we enqueued the new Route
+                Route newRoute = new Route()
+                        .createRouteId()
+                        .setDownloadId(refId)
+                        .setDownloadUrl(url)
+                        .setDownloadTimestamp(c.getTimeInMillis())
+                        .setState(RouteState.ENQUEUED)
+                        .setName(fileName);
+
+                Log.d(TAG, "NEW DOWNLOAD..." + newRoute.toString());
+
+                //Persist the new Route
+                routeManager.add(newRoute);
+
+                //TODO: Stop (We should do this via actions)
+                getActivity().finish();
             }
         });
     }
 
-    private boolean isValidUrl(String url) {
-        if (!TextUtils.isEmpty(url)) {
-            //TODO: Add extra validations.
-            return true;
-        }
-        return false;
-    }
-
-    private long enqueueFileDownload(String url) {
+    private long enqueueFileDownload(Uri url, String fileName) {
         try {
-            Uri uri = Uri.parse(url);
-            String fileName = uri.getLastPathSegment();
-            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+            DownloadManager.Request request = new DownloadManager.Request(url);
             request.setAllowedOverRoaming(false);
             request.setTitle(getString(R.string.newroute_download_in_progress_title));
             request.setDescription(getString(R.string.newroute_download_in_progress_text, fileName));
@@ -104,6 +103,6 @@ public class NewRouteActivityFragment extends Fragment {
         } catch (NullPointerException npe) {
             npe.printStackTrace();
         }
-        return StorageHelper.DEFAULT_LONG_VALUE;
+        return RESULT_PROBLEM_DURING_ENQUEUE;
     }
 }

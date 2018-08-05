@@ -1,4 +1,4 @@
-package com.pperotti.android.mapsexample.about;
+package com.pperotti.android.mapsexample.ui.about;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;

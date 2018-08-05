@@ -5,7 +5,7 @@ import android.app.DownloadManager;
 import android.content.IntentFilter;
 import android.util.Log;
 
-import com.pperotti.android.mapsexample.downloads.DownloadCompletionBroadcastReceiver;
+import com.pperotti.android.mapsexample.services.downloads.DownloadCompletionBroadcastReceiver;
 
 public class MapsExampleApplication extends Application {
 
