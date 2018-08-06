@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Build;
+import android.util.Log;
 
 /**
  * Download helper activity to retrieve status and file of the downloaded file.
@@ -21,14 +22,10 @@ public class DownloadHelper {
         int statusColumnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
         int status = cursor.getInt(statusColumnIndex);
 
-        //int localFilePathIndex = cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME);
-        //String localFilePath = cursor.getString(localFilePathIndex);
-
         cursor.close();
 
         DownloadInfo downloadInfo = new DownloadInfo();
         downloadInfo.setDownloadStatus(status);
-        //downloadInfo.setLocalFilePath(localFilePath);
 
         return downloadInfo;
     }

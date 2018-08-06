@@ -74,8 +74,10 @@ public class NewRouteActivityFragment extends Fragment {
 
                 String url = newrouteUrl.getText().toString();
 
+                long routeId = System.nanoTime();
                 Uri uri = Uri.parse(url);
-                String fileName = uri.getLastPathSegment();
+                //String fileName = uri.getLastPathSegment();
+                String fileName = routeId + ".gpx";
 
                 //Download File
                 long refId = enqueueFileDownload(uri, fileName);
@@ -84,23 +86,21 @@ public class NewRouteActivityFragment extends Fragment {
                 Calendar c = Calendar.getInstance();
                 c.setTimeInMillis(System.currentTimeMillis());
 
+                String localFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                        + File.separator
+                        + "gpx"
+                        + File.separator
+                        + fileName;
+
                 //Create the object to persist the fact that we enqueued the new Route
                 Route newRoute = new Route()
-                        .createRouteId()
+                        .setRouteId(routeId)
                         .setDownloadId(refId)
                         .setDownloadUrl(url)
                         .setDownloadTimestamp(c.getTimeInMillis())
-                        .setLocalFilePath(Environment.DIRECTORY_DOWNLOADS
-                                + File.separator
-                                + getContext().getPackageName()
-                                + File.separator
-                                + "gpx"
-                                + File.separator
-                                + fileName)
+                        .setLocalFilePath(localFilePath)
                         .setState(RouteState.ENQUEUED)
                         .setName(fileName);
-
-                Log.d(TAG, "NEW DOWNLOAD..." + newRoute.toString());
 
                 //Persist the new Route
                 routeManager.add(newRoute);
@@ -120,7 +120,6 @@ public class NewRouteActivityFragment extends Fragment {
             request.setDescription(getString(R.string.notification_download_enqueued_text));
             request.setVisibleInDownloadsUi(true);
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,File.separator
-                    + getContext().getPackageName()
                     + File.separator + "gpx"
                     + File.separator + fileName);
 

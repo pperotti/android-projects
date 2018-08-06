@@ -169,4 +169,29 @@ public class RouteProvider extends ContentProvider {
         private DataContract() {
         }
     }
+
+    /**
+     * Simple Wrapper for the columns this provider uses so DB columns are not directly exposed
+     */
+    public static final class Columns {
+        public static final String ID = MapsExampleDatabase.RT_COLUMN_ID;
+        public static final String ROUTE_ID = MapsExampleDatabase.RT_COLUMN_ROUTE_ID;
+        public static final String DOWNLOAD_ID = MapsExampleDatabase.RT_COLUMN_DOWNLOAD_ID;
+        public static final String DOWNLOAD_URL = MapsExampleDatabase.RT_COLUMN_DOWNLOAD_URL;
+        public static final String LOCAL_PATH = MapsExampleDatabase.RT_COLUMN_LOCAL_PATH;
+        public static final String NAME = MapsExampleDatabase.RT_COLUMN_NAME;
+        public static final String STATE = MapsExampleDatabase.RT_COLUMN_STATE;
+        public static final String DOWNLOAD_TIMESTAMP = MapsExampleDatabase.RT_COLUMN_TIMESTAMP;
+
+        public static final String[] ALL_COLUMNS_PROJECTION = {
+                ID,
+                ROUTE_ID,
+                DOWNLOAD_ID,
+                DOWNLOAD_URL,
+                LOCAL_PATH,
+                NAME,
+                STATE,
+                DOWNLOAD_TIMESTAMP
+        };
+    }
 }

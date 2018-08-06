@@ -3,22 +3,25 @@ package com.pperotti.android.mapsexample.ui.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.pperotti.android.mapsexample.R;
 import com.pperotti.android.mapsexample.ui.about.AboutActivity;
-import com.pperotti.android.mapsexample.ui.home.dummy.DummyContent;
 import com.pperotti.android.mapsexample.ui.newroute.NewRouteActivity;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, RouteFragment.OnListFragmentInteractionListener {
+public class RoutesActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener,
+        RouteFragment.OnListFragmentInteractionListener {
+
+    private static final String TAG = RoutesActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, NewRouteActivity.class));
+                startActivity(new Intent(RoutesActivity.this, NewRouteActivity.class));
             }
         });
 
@@ -64,11 +67,11 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_routes) {
             //do nothing apart from closing the drawer.
         } else if (id == R.id.nav_new_route) {
-            startActivity(new Intent(MainActivity.this, NewRouteActivity.class));
+            startActivity(new Intent(RoutesActivity.this, NewRouteActivity.class));
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_about) {
-            startActivity(new Intent(MainActivity.this, AboutActivity.class));
+            startActivity(new Intent(RoutesActivity.this, AboutActivity.class));
         } else if (id == R.id.nav_share) {
 
         }
@@ -78,8 +81,9 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-        //
+    public void onListFragmentInteraction(RouteItem item) {
+        //Nothing for the moment
     }
 }

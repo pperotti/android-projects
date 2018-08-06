@@ -9,23 +9,17 @@ import android.util.Log;
 
 import com.pperotti.android.mapsexample.domain.routes.Route;
 import com.pperotti.android.mapsexample.domain.routes.RouteState;
-import com.pperotti.android.mapsexample.services.database.MapsExampleDatabase;
-
-import java.text.SimpleDateFormat;
 
 /**
  * This class helps interacting with the ROUTES DB.
  */
 public class RouteManager {
 
-    private static final String TAG = RouteManager.class.getSimpleName();
-
     //Value to use as key in extras to pass route id.
     public static final String EXTRA_ROUTE_ID = "extras_route_id";
-
     //Constant to define there is no valid route id identified.
     public static final long DEFAULT_NO_ROUTE_ID = -1;
-
+    private static final String TAG = RouteManager.class.getSimpleName();
     private ContentResolver contentResolver;
 
     public RouteManager(Context context) {
@@ -60,13 +54,13 @@ public class RouteManager {
         if (contentResolver != null) {
 
             ContentValues values = new ContentValues();
-            values.put(MapsExampleDatabase.RT_COLUMN_ROUTE_ID, route.getRouteId());
-            values.put(MapsExampleDatabase.RT_COLUMN_DOWNLOAD_ID, route.getDownloadId());
-            values.put(MapsExampleDatabase.RT_COLUMN_DOWNLOAD_URL, route.getDownloadUrl());
-            values.put(MapsExampleDatabase.RT_COLUMN_LOCAL_PATH, route.getLocalFilePath());
-            values.put(MapsExampleDatabase.RT_COLUMN_STATE, route.getState().name());
-            values.put(MapsExampleDatabase.RT_COLUMN_NAME, route.getName());
-            values.put(MapsExampleDatabase.RT_COLUMN_TIMESTAMP, route.getDownloadTimestamp());
+            values.put(RouteProvider.Columns.ROUTE_ID, route.getRouteId());
+            values.put(RouteProvider.Columns.DOWNLOAD_ID, route.getDownloadId());
+            values.put(RouteProvider.Columns.DOWNLOAD_URL, route.getDownloadUrl());
+            values.put(RouteProvider.Columns.LOCAL_PATH, route.getLocalFilePath());
+            values.put(RouteProvider.Columns.STATE, route.getState().name());
+            values.put(RouteProvider.Columns.NAME, route.getName());
+            values.put(RouteProvider.Columns.DOWNLOAD_TIMESTAMP, route.getDownloadTimestamp());
 
             try {
                 contentResolver.insert(
@@ -87,12 +81,11 @@ public class RouteManager {
     public Route getRouteByRouteId(long routeId) {
         Route route = null;
         if (contentResolver != null) {
-            String[] projection = getRouteProjection();
-            String selection = MapsExampleDatabase.RT_COLUMN_ROUTE_ID + " = ?";
+            String selection = RouteProvider.Columns.ROUTE_ID + " = ?";
             String[] selectionArgs = {String.valueOf(routeId)};
             Cursor cursor = contentResolver.query(
                     RouteProvider.DataContract.CONTENT_URI,
-                    projection,
+                    RouteProvider.Columns.ALL_COLUMNS_PROJECTION,
                     selection,
                     selectionArgs,
                     null
@@ -113,12 +106,11 @@ public class RouteManager {
     public Route getRouteByDownloadId(long downloadId) {
         Route route = null;
         if (contentResolver != null) {
-            String[] projection = getRouteProjection();
-            String selection = MapsExampleDatabase.RT_COLUMN_DOWNLOAD_ID + " = ?";
+            String selection = RouteProvider.Columns.DOWNLOAD_ID + " = ?";
             String[] selectionArgs = {String.valueOf(downloadId)};
             Cursor cursor = contentResolver.query(
                     RouteProvider.DataContract.CONTENT_URI,
-                    projection,
+                    RouteProvider.Columns.ALL_COLUMNS_PROJECTION,
                     selection,
                     selectionArgs,
                     null
@@ -130,29 +122,18 @@ public class RouteManager {
         return route;
     }
 
-    private String[] getRouteProjection() {
-        return new String[]{
-                MapsExampleDatabase.RT_COLUMN_ROUTE_ID,
-                MapsExampleDatabase.RT_COLUMN_DOWNLOAD_ID,
-                MapsExampleDatabase.RT_COLUMN_DOWNLOAD_URL,
-                MapsExampleDatabase.RT_COLUMN_LOCAL_PATH,
-                MapsExampleDatabase.RT_COLUMN_STATE,
-                MapsExampleDatabase.RT_COLUMN_NAME,
-                MapsExampleDatabase.RT_COLUMN_TIMESTAMP
-        };
-    }
 
     private Route getRouteFromCursor(Cursor cursor) {
         try {
             cursor.moveToFirst();
 
-            int routeIdIndex = cursor.getColumnIndex(MapsExampleDatabase.RT_COLUMN_ROUTE_ID);
-            int downloadIdIndex = cursor.getColumnIndex(MapsExampleDatabase.RT_COLUMN_DOWNLOAD_ID);
-            int downloadUrlIndex = cursor.getColumnIndex(MapsExampleDatabase.RT_COLUMN_DOWNLOAD_URL);
-            int localPathIndex = cursor.getColumnIndex(MapsExampleDatabase.RT_COLUMN_LOCAL_PATH);
-            int stateIndex = cursor.getColumnIndex(MapsExampleDatabase.RT_COLUMN_STATE);
-            int nameIndex = cursor.getColumnIndex(MapsExampleDatabase.RT_COLUMN_NAME);
-            int timestampIndex = cursor.getColumnIndex(MapsExampleDatabase.RT_COLUMN_TIMESTAMP);
+            int routeIdIndex = cursor.getColumnIndex(RouteProvider.Columns.ROUTE_ID);
+            int downloadIdIndex = cursor.getColumnIndex(RouteProvider.Columns.DOWNLOAD_ID);
+            int downloadUrlIndex = cursor.getColumnIndex(RouteProvider.Columns.DOWNLOAD_URL);
+            int localPathIndex = cursor.getColumnIndex(RouteProvider.Columns.LOCAL_PATH);
+            int stateIndex = cursor.getColumnIndex(RouteProvider.Columns.STATE);
+            int nameIndex = cursor.getColumnIndex(RouteProvider.Columns.NAME);
+            int timestampIndex = cursor.getColumnIndex(RouteProvider.Columns.DOWNLOAD_TIMESTAMP);
 
             return new Route()
                     .setRouteId(cursor.getLong(routeIdIndex))
@@ -161,7 +142,7 @@ public class RouteManager {
                     .setLocalFilePath(cursor.getString(localPathIndex))
                     .setState(RouteState.valueOf(cursor.getString(stateIndex)))
                     .setName(cursor.getString(nameIndex))
-                    .setDownloadTimestamp(cursor.getString(timestampIndex));
+                    .setDownloadTimestamp(cursor.getLong(timestampIndex));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -196,15 +177,15 @@ public class RouteManager {
         if (route != null && contentResolver != null) {
             try {
                 ContentValues values = new ContentValues();
-                values.put(MapsExampleDatabase.RT_COLUMN_ROUTE_ID, route.getRouteId());
-                values.put(MapsExampleDatabase.RT_COLUMN_DOWNLOAD_ID, route.getDownloadId());
-                values.put(MapsExampleDatabase.RT_COLUMN_DOWNLOAD_URL, route.getDownloadUrl());
-                values.put(MapsExampleDatabase.RT_COLUMN_LOCAL_PATH, route.getLocalFilePath());
-                values.put(MapsExampleDatabase.RT_COLUMN_STATE, route.getState().name());
-                values.put(MapsExampleDatabase.RT_COLUMN_NAME, route.getName());
-                values.put(MapsExampleDatabase.RT_COLUMN_TIMESTAMP, route.getDownloadTimestamp());
+                values.put(RouteProvider.Columns.ROUTE_ID, route.getRouteId());
+                values.put(RouteProvider.Columns.DOWNLOAD_ID, route.getDownloadId());
+                values.put(RouteProvider.Columns.DOWNLOAD_URL, route.getDownloadUrl());
+                values.put(RouteProvider.Columns.LOCAL_PATH, route.getLocalFilePath());
+                values.put(RouteProvider.Columns.STATE, route.getState().name());
+                values.put(RouteProvider.Columns.NAME, route.getName());
+                values.put(RouteProvider.Columns.DOWNLOAD_TIMESTAMP, route.getDownloadTimestamp());
 
-                String where = MapsExampleDatabase.RT_COLUMN_ROUTE_ID + "= ?";
+                String where = RouteProvider.Columns.ROUTE_ID + "= ?";
                 String[] whereArgs = {String.valueOf(route.getRouteId())};
 
                 return contentResolver.update(

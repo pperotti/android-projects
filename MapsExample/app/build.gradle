@@ -34,4 +34,7 @@ dependencies {
     // GPX Parser Dependencies
     implementation 'net.danlew:android.joda:2.9.9.4'
     api 'io.ticofab.androidgpxparser:parser:1.2.0'
+
+    //Helper for Cursor and RecyclerView
+    implementation 'com.androidessence:recyclerviewcursoradapter:1.0.0'
 }

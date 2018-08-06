@@ -18,6 +18,7 @@ public class MapsExampleDatabase extends SQLiteOpenHelper {
     public static final String RT_COLUMN_STATE = "state";
     public static final String RT_COLUMN_NAME = "name";
     public static final String RT_COLUMN_TIMESTAMP = "timestamp";
+    public static final String RT_COLUMN_ID = "_id";
 
     //Metrics Table
     public static final String MT_TABLE_NAME = "metrics";
@@ -41,13 +42,14 @@ public class MapsExampleDatabase extends SQLiteOpenHelper {
     private static final String STATEMENT_CREATE_ROUTES = "CREATE TABLE "
             + RT_TABLE_NAME
             + " ("
-            + RT_COLUMN_ROUTE_ID + " LONG PRIMARY KEY, "
+            + RT_COLUMN_ID + " INTEGER PRIMARY KEY, "
+            + RT_COLUMN_ROUTE_ID + " LONG, "
             + RT_COLUMN_DOWNLOAD_ID + " LONG,"
             + RT_COLUMN_DOWNLOAD_URL + " TEXT,"
             + RT_COLUMN_LOCAL_PATH + " TEXT,"
             + RT_COLUMN_STATE + " TEXT,"
             + RT_COLUMN_NAME + " TEXT,"
-            + RT_COLUMN_TIMESTAMP + " DATETIME"
+            + RT_COLUMN_TIMESTAMP + " LONG"
             + ")";
 
     //Statement CREATE 'metrics'

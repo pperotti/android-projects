@@ -1,18 +1,24 @@
 package com.pperotti.android.mapsexample.ui.home;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.pperotti.android.mapsexample.R;
-import com.pperotti.android.mapsexample.ui.home.dummy.DummyContent;
-import com.pperotti.android.mapsexample.ui.home.dummy.DummyContent.DummyItem;
+import com.pperotti.android.mapsexample.services.routes.RouteProvider;
 
 /**
  * A fragment representing a list of Items.
@@ -20,38 +26,19 @@ import com.pperotti.android.mapsexample.ui.home.dummy.DummyContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class RouteFragment extends Fragment {
+public class RouteFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
+    private static final String TAG = RouteFragment.class.getSimpleName();
+    private static final int ROUTE_LOADER_ID = 100;
     // TODO: Customize parameters
-    private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    private MyRouteRecyclerViewAdapter adapter = null;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
     public RouteFragment() {
-    }
-
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static RouteFragment newInstance(int columnCount) {
-        RouteFragment fragment = new RouteFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
     }
 
     @Override
@@ -63,16 +50,13 @@ public class RouteFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyRouteRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            adapter = new MyRouteRecyclerViewAdapter(getContext());
+            recyclerView.setAdapter(adapter);
+            //recyclerView.setAdapter(new MyRouteRecyclerViewAdapter(DummyContent.ITEMS, mListener));
         }
         return view;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -91,6 +75,56 @@ public class RouteFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        LoaderManager lm = getActivity().getSupportLoaderManager();
+        if (lm != null) {
+            lm.restartLoader(ROUTE_LOADER_ID, null, this);
+        }
+    }
+
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle bundle) {
+        if (ROUTE_LOADER_ID == id) {
+            return new CursorLoader(
+                    getContext(),
+                    RouteProvider.DataContract.CONTENT_URI,
+                    RouteProvider.Columns.ALL_COLUMNS_PROJECTION,
+                    null,
+                    null,
+                    null
+            );
+        } else {
+            throw new UnsupportedOperationException("Unknown loader id: " + id);
+        }
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
+        if (ROUTE_LOADER_ID == loader.getId()) {
+            if (adapter != null) {
+                Log.d(TAG, "onLoadFInished!");
+                adapter.swapCursor(cursor);
+            }
+        } else {
+            throw new UnsupportedOperationException("Unknown loader id: " + loader.getId());
+        }
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        if (ROUTE_LOADER_ID == loader.getId()) {
+            if (adapter != null) {
+                adapter.swapCursor(null);
+            }
+        } else {
+            throw new UnsupportedOperationException("Unknown loader id: " + loader.getId());
+        }
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -102,7 +136,6 @@ public class RouteFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(RouteItem item);
     }
 }

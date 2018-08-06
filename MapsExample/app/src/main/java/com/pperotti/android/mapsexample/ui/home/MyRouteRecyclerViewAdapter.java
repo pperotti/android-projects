@@ -1,78 +1,96 @@
 package com.pperotti.android.mapsexample.ui.home;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.content.Context;
+import android.database.Cursor;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.androidessence.recyclerviewcursoradapter.RecyclerViewCursorAdapter;
+import com.androidessence.recyclerviewcursoradapter.RecyclerViewCursorViewHolder;
 import com.pperotti.android.mapsexample.R;
-import com.pperotti.android.mapsexample.ui.home.RouteFragment.OnListFragmentInteractionListener;
-import com.pperotti.android.mapsexample.ui.home.dummy.DummyContent.DummyItem;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
+ * Adapter that works with Cursors.
  */
-public class MyRouteRecyclerViewAdapter extends RecyclerView.Adapter<MyRouteRecyclerViewAdapter.ViewHolder> {
+public class MyRouteRecyclerViewAdapter extends RecyclerViewCursorAdapter<MyRouteRecyclerViewAdapter.RouteViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private static final String TAG = MyRouteRecyclerViewAdapter.class.getSimpleName();
 
-    public MyRouteRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
-        mListener = listener;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
+
+//    private final List<RouteItem> mValues;
+//    private final OnListFragmentInteractionListener mListener;
+//
+//    public MyRouteRecyclerViewAdapter(List<RouteItem> items, OnListFragmentInteractionListener listener) {
+//        mValues = items;
+//        mListener = listener;
+//    }
+
+    public MyRouteRecyclerViewAdapter(Context context) {
+        super(context);
+        setupCursorAdapter(null, 0, R.layout.item_route, false);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_route, parent, false);
-        return new ViewHolder(view);
+    public RouteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new RouteViewHolder(mCursorAdapter.newView(mContext, mCursorAdapter.getCursor(), parent));
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+    public void onBindViewHolder(final RouteViewHolder holder, int position) {
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
+        // Move cursor to this position
+        mCursorAdapter.getCursor().moveToPosition(position);
+
+        // Set the ViewHolder
+        setViewHolder(holder);
+
+        // Bind this view
+        mCursorAdapter.bindView(holder.itemView, mContext, mCursorAdapter.getCursor());
+
+//        holder.mItem = mValues.get(position);
+//        holder.mIdView.setText(mValues.get(position).id);
+//        holder.mContentView.setText(mValues.get(position).content);
+//        holder.mView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (null != mListener) {
+//                    // Notify the active callbacks interface (the activity, if the
+//                    // fragment is attached to one) that an item has been selected.
+//                    mListener.onListFragmentInteraction(holder.mItem);
+//                }
+//            }
+//        });
     }
 
-    @Override
-    public int getItemCount() {
-        return mValues.size();
-    }
+    public class RouteViewHolder extends RecyclerViewCursorViewHolder {
+        public final TextView fileName;
+        public final TextView filePath;
+        public final TextView state;
+        public final TextView timestamp;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
-
-        public ViewHolder(View view) {
+        public RouteViewHolder(View view) {
             super(view);
-            mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            fileName = view.findViewById(R.id.route_file_name);
+            filePath = view.findViewById(R.id.route_file_path);
+            state = view.findViewById(R.id.route_state);
+            timestamp = view.findViewById(R.id.route_timestamp);
         }
 
         @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+        public void bindCursor(Cursor cursor) {
+            filePath.setText(cursor.getString(4));
+            fileName.setText(cursor.getString(5));
+            state.setText(cursor.getString(6));
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(cursor.getLong(7));
+            timestamp.setText(simpleDateFormat.format(c.getTime()));
         }
     }
 }

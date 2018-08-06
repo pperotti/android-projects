@@ -2,7 +2,6 @@ package com.pperotti.android.mapsexample.domain.routes;
 
 import android.text.TextUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 /**
@@ -29,9 +28,7 @@ public class Route {
     private RouteState state;
 
     //The time where the download started.
-    private String downloadTimestamp;
-
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    private long downloadTimestamp;
 
     public Route() {
         state = RouteState.NOT_STARTED;
@@ -87,15 +84,11 @@ public class Route {
         return this;
     }
 
-    public String getDownloadTimestamp() {
+    public long getDownloadTimestamp() {
         return downloadTimestamp;
     }
 
     public Route setDownloadTimestamp(long downloadTimestamp) {
-        return setDownloadTimestamp(simpleDateFormat.format(downloadTimestamp));
-    }
-
-    public Route setDownloadTimestamp(String downloadTimestamp) {
         this.downloadTimestamp = downloadTimestamp;
         return this;
     }

@@ -72,6 +72,7 @@ public class DownloadParserIntentService extends IntentService {
 
                 Log.d(TAG, String.format("AffectedRows=%d", affectedRow));
                 Log.d(TAG, "Processing ...\n" + route.toString());
+                Log.d(TAG, "LocalFilePath=" + route.getLocalFilePath());
 
                 //Create table to host the points
                 pointsManager.createPointsTable(route.getRouteId());
@@ -147,12 +148,19 @@ public class DownloadParserIntentService extends IntentService {
         List<TrackPoint> trackPointList = trackSegment.getTrackPoints();
         int progress = 1;
         int max = trackPointList.size();
+        int step = 0;
+        int stepMax = 1000;
         long routeId = route.getRouteId();
         for (TrackPoint trackPoint : trackPointList ) {
             pointsManager.insertTrackPoint(routeId, trackPoint.getLatitude(), trackPoint.getLongitude());
 
-            //Update Notification Progress¡
-            NotificationsHelper.updateNotification(getApplicationContext(), route, progress, max);
+            if (step == stepMax) {
+                //Update Notification Progress¡
+                NotificationsHelper.updateNotification(getApplicationContext(), route, progress, max);
+                step = 0;
+            } else {
+                step++;
+            }
 
             //Make sure we update the progress.
             progress++;

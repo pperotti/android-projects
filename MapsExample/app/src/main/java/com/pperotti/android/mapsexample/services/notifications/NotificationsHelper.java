@@ -125,7 +125,7 @@ public class NotificationsHelper {
                         .setSmallIcon(android.R.drawable.btn_plus)
                         .setContentTitle(title)
                         .setContentText(text)
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setPriority(NotificationCompat.PRIORITY_LOW)
                         .setStyle(new NotificationCompat.BigTextStyle());
 
         return builder;
