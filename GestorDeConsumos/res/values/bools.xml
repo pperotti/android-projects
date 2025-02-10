@@ -1,7 +1,0 @@
-<resources>
-
-    <bool name="debug_enabled">true</bool>
-    <bool name="info_enabled">true</bool>
-    <bool name="error_enabled">true</bool>
-    
-</resources>
